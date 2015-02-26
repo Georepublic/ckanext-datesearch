@@ -24,7 +24,7 @@ class DateSearchPlugin(plugins.SingletonPlugin):
         # Add a date-range query with the selected start and end dates into the
         # Solr facet queries.
         fq = search_params['fq']
-        fq = '{fq} +metadata_modified:[{start_date} TO {end_date}]'.format(
+        fq = '{fq} +indexed_release_date:[{start_date} TO {end_date}]'.format(
             fq=fq, start_date=start_date, end_date=end_date)
         search_params['fq'] = fq
         return search_params

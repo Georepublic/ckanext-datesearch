@@ -1,10 +1,13 @@
 this.ckan.module('daterangepicker-module', function($, _) {
     return {
         initialize: function() {
-
+            $.proxyAll(this, /_on/);
+            this.el.ready(this._onReady);
+        },
+        _onReady: function(fn) {
             // Add hidden <input> tags #ext_startdate and #ext_enddate,
             // if they don't already exist.
-            var form = $("#dataset-search");
+            var form = $(".search-form");
             if ($("#ext_startdate").length === 0) {
                 $('<input type="hidden" id="ext_startdate" name="ext_startdate" />').appendTo(form);
             }
@@ -45,8 +48,8 @@ this.ckan.module('daterangepicker-module', function($, _) {
                 // the chosen end date.
                 $('#ext_enddate').val(end);
 
-                // Submit the <form id="dataset-search">.
-                $("#dataset-search").submit();
+                // Submit the <form id="search-form">.
+                $(".search-form").submit();
             });
         }
     }
